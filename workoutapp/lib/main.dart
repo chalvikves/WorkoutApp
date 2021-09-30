@@ -10,17 +10,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primaryColor: col.black,
-        scaffoldBackgroundColor: col.white,
-        accentColor: col.white,
+      theme: ThemeData.from(
+        colorScheme: col.colorSchemeLight,
       ),
-      darkTheme: ThemeData(
-        scaffoldBackgroundColor: col.black,
-        primaryColor: col.white,
-        accentColor: col.black,
+      darkTheme: ThemeData.from(
+        colorScheme: col.colorSchemeDark,
       ),
+      // TODO: Implement high contrast theme
+      // highContrastTheme: ThemeData(
+      //   colorScheme: col.colorSchemeLightHigh,
+      // ),
+      // highContrastDarkTheme: ThemeData(
+      //   colorScheme: col.colorSchemeDarkHigh,
+      // ),
       home: Home(),
     );
   }

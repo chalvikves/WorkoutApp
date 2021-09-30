@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:workoutapp/views/dashboard.dart';
+import 'package:workoutapp/views/settings.dart';
+import 'package:workoutapp/views/statistics.dart';
+import 'package:workoutapp/views/workouts.dart';
+import '../static/colors.dart' as col;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -9,24 +15,76 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  int index = 0;
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(tabs: [
-              Tab(
-                text: 'hej',
-              )
-            ]),
-          ),
-          body: TabBarView(
-            children: [
-              Icon(Icons.ac_unit_outlined),
-              Icon(Icons.h_mobiledata),
-              Icon(Icons.face),
-            ],
+    final _pages = [
+      Dashboard(),
+      Workouts(),
+      Statistics(),
+      Settings(),
+    ];
+
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle(
+        statusBarIconBrightness:
+            MediaQuery.of(context).platformBrightness == Brightness.light
+                ? Brightness.dark
+                : Brightness.light,
+        statusBarBrightness:
+            MediaQuery.of(context).platformBrightness == Brightness.light
+                ? Brightness.light
+                : Brightness.dark,
+      ),
+      child: MaterialApp(
+        home: SafeArea(
+          bottom: false,
+          top: false,
+          child: Scaffold(
+            body: _pages[index],
+            backgroundColor: Theme.of(context).colorScheme.background,
+            bottomNavigationBar: BottomNavigationBar(
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home_rounded),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.fitness_center_rounded),
+                  label: 'Workouts',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.leaderboard_rounded),
+                  label: 'Statistics',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings_rounded),
+                  label: 'Settings',
+                ),
+              ],
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              selectedItemColor: Theme.of(context).colorScheme.primary,
+              unselectedItemColor: Theme.of(context).colorScheme.onSurface,
+              selectedFontSize: 12,
+              unselectedFontSize: 12,
+              currentIndex: index,
+              onTap: (ind) {
+                setState(() {
+                  index = ind;
+                });
+              },
+            ),
           ),
         ),
       ),
