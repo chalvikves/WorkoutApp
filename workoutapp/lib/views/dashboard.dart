@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/views/Widgets/CardForWorkout.dart';
+import 'package:workoutapp/views/Widgets/emptyPast.dart';
 import '../static/colors.dart' as col;
 
 class Dashboard extends StatefulWidget {
@@ -10,6 +11,12 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  /* 
+  TODO:
+    * Navigation for buttons
+    
+  */
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -68,11 +75,11 @@ class _DashboardState extends State<Dashboard> {
                 Text(
                   "Create a new workout",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 CardForWorkout(
                   onPressed: () => print('hi'),
@@ -89,25 +96,32 @@ class _DashboardState extends State<Dashboard> {
                 Text(
                   "Last workout",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
-                CardForWorkout(
-                  onPressed: () => print('hi'),
-                  title: "Push workout",
-                  muscles: "Chest, triceps and Shoulders",
-                  icon: Icon(Icons.arrow_forward_ios_rounded),
+                Container(
+                  height: 100,
+                  child: EmptyPastList(
+                    title: 'No last workout',
+                    desc: "See your past workout here. Let's workout!",
+                  ),
                 ),
+                // CardForWorkout(
+                //   onPressed: () => print('hi'),
+                //   title: "Push workout",
+                //   muscles: "Chest, triceps and Shoulders",
+                //   icon: Icon(Icons.arrow_forward_ios_rounded),
+                // ),
                 SizedBox(
                   height: 40,
                 ),
                 Text(
                   "Statistics",
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(
@@ -118,7 +132,7 @@ class _DashboardState extends State<Dashboard> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Container(
-                    height: 210,
+                    height: 200,
                     child: Center(
                       child: Icon(
                         Icons.leaderboard_rounded,

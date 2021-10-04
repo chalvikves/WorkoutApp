@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/views/Widgets/CardForWorkout.dart';
+import 'package:workoutapp/views/Widgets/emptyPast.dart';
+import 'package:workoutapp/views/Widgets/emptySaved.dart';
 import '../static/colors.dart' as col;
 
 class Workouts extends StatefulWidget {
@@ -10,10 +12,17 @@ class Workouts extends StatefulWidget {
 }
 
 class _WorkoutsState extends State<Workouts> {
+  /* 
+  TODO: 
+    * Create workout page
+    * View model for workouts
+  
+   */
+
   List<String> titles = [
-    'Push workout',
-    'Pull workout',
-    'Legs workout',
+    //'Push workout',
+    //'Pull workout',
+    //'Legs workout',
   ];
   List<String> muscles = [
     "Chest, triceps and Shoulders",
@@ -82,31 +91,31 @@ class _WorkoutsState extends State<Workouts> {
                         height: 20,
                       ),
                       Expanded(
-                        child: ListView.builder(
-                          itemCount: titles.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                CardForWorkout(
-                                  title: titles[index],
-                                  onPressed: () => print('hi'),
-                                  muscles: muscles[index],
-                                  icon: Icon(Icons.arrow_forward_ios_rounded),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            );
-                          },
-                        ),
+                        child: titles.isEmpty
+                            ? EmptySavedList()
+                            : ListView.builder(
+                                itemCount: titles.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      CardForWorkout(
+                                        title: titles[index],
+                                        onPressed: () => print('hi'),
+                                        muscles: muscles[index],
+                                        icon: Icon(
+                                            Icons.arrow_forward_ios_rounded),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
                       ),
                       SizedBox(
                         height: 10,
                       ),
-                      Text(
-                        "Kanske en grid med bara små rutor för varje, eller så göra en lista såhär",
-                      )
                     ],
                   ),
                 ),
@@ -128,24 +137,31 @@ class _WorkoutsState extends State<Workouts> {
                         height: 20,
                       ),
                       Expanded(
-                        child: ListView.builder(
-                          itemCount: titles.length,
-                          itemBuilder: (context, index) {
-                            return Column(
-                              children: [
-                                CardForWorkout(
-                                  title: titles[index],
-                                  onPressed: () => print('hi'),
-                                  muscles: muscles[index],
-                                  icon: Icon(Icons.arrow_forward_ios_rounded),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
-                            );
-                          },
-                        ),
+                        child: titles.isEmpty
+                            ? EmptyPastList(
+                                title: 'No past workouts',
+                                desc:
+                                    "See all your past workouts here. Come on, let's workout!",
+                              )
+                            : ListView.builder(
+                                itemCount: titles.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      CardForWorkout(
+                                        title: titles[index],
+                                        onPressed: () => print('hi'),
+                                        muscles: muscles[index],
+                                        icon: Icon(
+                                            Icons.arrow_forward_ios_rounded),
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ),
                       ),
                     ],
                   ),

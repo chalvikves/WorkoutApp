@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:workoutapp/views/CreateWorkout.dart';
 import 'package:workoutapp/views/dashboard.dart';
 import 'package:workoutapp/views/settings.dart';
 import 'package:workoutapp/views/statistics.dart';
@@ -24,15 +25,15 @@ class _HomeState extends State<Home> {
     super.dispose();
   }
 
-  int index = 0;
+  int index = 1;
 
   @override
   Widget build(BuildContext context) {
     final _pages = [
+      CreateWorkout(),
+      //Workouts(),
       Dashboard(),
-      Workouts(),
       Statistics(),
-      Settings(),
     ];
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -56,20 +57,16 @@ class _HomeState extends State<Home> {
             bottomNavigationBar: BottomNavigationBar(
               items: [
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.home_rounded),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
                   icon: Icon(Icons.fitness_center_rounded),
                   label: 'Workouts',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.leaderboard_rounded),
-                  label: 'Statistics',
+                  icon: Icon(Icons.home_rounded),
+                  label: 'Home',
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.settings_rounded),
-                  label: 'Settings',
+                  icon: Icon(Icons.leaderboard_rounded),
+                  label: 'Statistics',
                 ),
               ],
               type: BottomNavigationBarType.fixed,
