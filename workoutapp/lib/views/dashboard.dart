@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:workoutapp/views/Widgets/CardForWorkout.dart';
-import 'package:workoutapp/views/Widgets/emptyPast.dart';
 import '../static/colors.dart' as col;
 
 class Dashboard extends StatefulWidget {
@@ -11,11 +10,24 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  PageController _statController = PageController();
   /* 
   TODO:
     * Navigation for buttons
     
   */
+
+  @override
+  void dispose() {
+    _statController.dispose();
+    super.dispose();
+  }
+
+  var iconsMult = [
+    Icon(Icons.leaderboard_rounded, size: 72),
+    Icon(Icons.account_balance_rounded, size: 72),
+    Icon(Icons.label_important_outline_rounded, size: 72),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 23),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -66,24 +78,24 @@ class _DashboardState extends State<Dashboard> {
                 Text(
                   "Let's crush this workout!",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(
                   height: 60,
                 ),
                 Text(
-                  "Create a new workout",
+                  "Start a new workout",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 20,
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 CardForWorkout(
                   onPressed: () => print('hi'),
-                  title: "Create a new workout",
+                  title: "Start a new workout",
                   muscles: "You can do this",
                   icon: Icon(
                     Icons.add_rounded,
@@ -91,56 +103,44 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 SizedBox(
-                  height: 40,
-                ),
-                Text(
-                  "Last workout",
-                  style: TextStyle(
-                    fontSize: 24,
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  height: 100,
-                  child: EmptyPastList(
-                    title: 'No last workout',
-                    desc: "See your past workout here. Let's workout!",
-                  ),
-                ),
-                // CardForWorkout(
-                //   onPressed: () => print('hi'),
-                //   title: "Push workout",
-                //   muscles: "Chest, triceps and Shoulders",
-                //   icon: Icon(Icons.arrow_forward_ios_rounded),
-                // ),
-                SizedBox(
-                  height: 40,
+                  height: 60,
                 ),
                 Text(
                   "Statistics",
                   style: TextStyle(
-                    fontSize: 24,
+                    fontSize: 20,
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15),
+                Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Color(0x33000),
+                        blurRadius: 20,
+                        blurStyle: BlurStyle.normal,
+                        offset: Offset(5, 10),
+                      ),
+                    ],
                   ),
-                  child: Container(
-                    height: 200,
-                    child: Center(
-                      child: Icon(
-                        Icons.leaderboard_rounded,
-                        size: 72,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height / 3,
+                      // TODO: Lägg till flera "sidor" för de olika statistikerna så man kan scrolla runt
+                      child: Center(
+                        child: PageView(
+                          controller: _statController,
+                          children: [...iconsMult],
+                        ),
                       ),
                     ),
+                    elevation: 3,
                   ),
-                  elevation: 3,
                 )
               ],
             ),

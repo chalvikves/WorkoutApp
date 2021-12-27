@@ -69,73 +69,26 @@ class _WorkoutsState extends State<Workouts> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 23),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 50,
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 2.8,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Saved Workouts",
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Expanded(
-                        child: titles.isEmpty
-                            ? EmptySavedList()
-                            : ListView.builder(
-                                itemCount: titles.length,
-                                itemBuilder: (context, index) {
-                                  return Column(
-                                    children: [
-                                      CardForWorkout(
-                                        title: titles[index],
-                                        onPressed: () => print('hi'),
-                                        muscles: muscles[index],
-                                        icon: Icon(
-                                            Icons.arrow_forward_ios_rounded),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                    ],
-                                  );
-                                },
-                              ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                    ],
+                Text(
+                  "Past workouts",
+                  style: TextStyle(
+                    fontSize: 24,
                   ),
                 ),
                 SizedBox(
-                  height: 40,
+                  height: titles.isEmpty ? 0 : 50,
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height / 2.8,
+                Expanded(
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        "Past workouts",
-                        style: TextStyle(
-                          fontSize: 24,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
                       Expanded(
                         child: titles.isEmpty
                             ? EmptyPastList(

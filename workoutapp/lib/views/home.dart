@@ -30,8 +30,8 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final _pages = [
-      CreateWorkout(),
-      //Workouts(),
+      //CreateWorkout(),
+      Workouts(),
       Dashboard(),
       Statistics(),
     ];

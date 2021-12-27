@@ -27,9 +27,19 @@ class _StatisticsState extends State<Statistics> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 23),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(
+                  height: 50,
+                ),
+                Text(
+                  "Statistics",
+                  style: TextStyle(
+                    fontSize: 24,
+                  ),
+                ),
                 SizedBox(
                   height: 50,
                 ),
